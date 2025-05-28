@@ -7,7 +7,8 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "jest",
-    "build": "echo 'Skipping build for backend-only project'"
+    "build": "echo 'Skipping build for backend-only project'",
+  "coverage": "jest --coverage"
   },
   "keywords": [
     "ecommerce",
