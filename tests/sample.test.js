@@ -6,8 +6,8 @@ const jwt = require("jsonwebtoken");
 
 describe("API Endpoints", () => {
     // Replace with a valid JWT for testing authorized endpoints
-    const userToken = jwt.sign({ id: "user123", role: "user" }, process.env.JWT_SECRET || "testsecret", { expiresIn: "1h" });
-    const adminToken = jwt.sign({ id: "admin123", role: "admin" }, process.env.JWT_SECRET || "testsecret", { expiresIn: "1h" });
+    const userToken = jwt.sign({ id: "kalp2002prajapati@gmail.com", role: "customer" }, process.env.JWT_SECRET || "testsecret", { expiresIn: "1h" });
+    const adminToken = jwt.sign({ id: "admin@gmail.com", role: "admin" }, process.env.JWT_SECRET || "testsecret", { expiresIn: "1h" });
 
     describe("Auth Routes", () => {
         test("Register a new user", async () => {
