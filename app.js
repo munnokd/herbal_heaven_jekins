@@ -52,7 +52,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Database connection
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect('mongodb+srv://kalp2002prajapati:SbjvllYj1oo6osxn@cluster0.xfojzlh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

@@ -6,7 +6,7 @@ const { User } = require('../models/Project');
 const createAdmin = async () => {
     try {
         // Connect to MongoDB
-        await mongoose.connect(process.env.MONGO_URI);
+        await mongoose.connect('mongodb+srv://kalp2002prajapati:SbjvllYj1oo6osxn@cluster0.xfojzlh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
         console.log('Connected to MongoDB');
 
         // Admin details

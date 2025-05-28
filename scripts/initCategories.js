@@ -43,7 +43,7 @@ const categories = [
 const initCategories = async () => {
     try {
         // Connect to MongoDB using the URI from environment variable or default
-        await mongoose.connect(process.env.MONGO_URI);
+        await mongoose.connect('mongodb+srv://kalp2002prajapati:SbjvllYj1oo6osxn@cluster0.xfojzlh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
         console.log('Connected to MongoDB');
 
         // Delete existing categories
