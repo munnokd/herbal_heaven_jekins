@@ -16,6 +16,11 @@
     "express",
     "mongodb"
   ],
+  "jest": {
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ]
+  },
   "author": "Your Name",
   "license": "MIT",
   "dependencies": {
