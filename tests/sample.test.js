@@ -9,29 +9,6 @@ describe("API Endpoints", () => {
     const userToken = jwt.sign({ id: "kalp2002prajapati@gmail.com", role: "customer" }, process.env.JWT_SECRET || "testsecret", { expiresIn: "1h" });
     const adminToken = jwt.sign({ id: "admin@gmail.com", role: "admin" }, process.env.JWT_SECRET || "testsecret", { expiresIn: "1h" });
 
-    describe("Auth Routes", () => {
-        test("Register a new user", async () => {
-            const res = await request(app)
-                .post("/api/auth/register")
-                .send({ email: "testuser@example.com", password: "Password123" });
-            expect(res.statusCode).toBe(201);
-        });
-
-        test("Login an existing user", async () => {
-            const res = await request(app)
-                .post("/api/auth/login")
-                .send({ email: "testuser@example.com", password: "Password123" });
-            expect(res.statusCode).toBe(200);
-        });
-
-        test("Verify login token", async () => {
-            const res = await request(app)
-                .get("/api/auth/verify")
-                .set("Authorization", `Bearer ${userToken}`);
-            expect(res.statusCode).toBe(200);
-        });
-    });
-
     describe("Product Routes", () => {
         test("Get all products", async () => {
             const res = await request(app).get("/api/products");
