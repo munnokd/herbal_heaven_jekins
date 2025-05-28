@@ -16,9 +16,23 @@
     "express",
     "mongodb"
   ],
+  "jest-junit": {
+    "outputDirectory": "test-results",
+    "outputName": "results.xml"
+  },
   "jest": {
     "testMatch": [
       "**/tests/**/*.test.js"
+    ],
+    "reporters": [
+      "default",
+      [
+        "jest-junit",
+        {
+          "outputDirectory": "test-results",
+          "outputName": "results.xml"
+        }
+      ]
     ]
   },
   "author": "Your Name",
