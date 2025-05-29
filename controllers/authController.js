@@ -28,7 +28,7 @@ exports.login = async (req, res) => {
 
     const token = jwt.sign(
       { id: user._id, role: user.role },
-      process.env.JWT_SECRET,
+      '86260fdbfddda9a87053810e4b1123b00902a786310963c223f168983a8c04ee8a90eb87f4008a0527472cfbbabb22e88e2ae763a7c0090a8834da5755ee5793',
       {
         expiresIn: "1h",
       }
@@ -56,7 +56,7 @@ exports.verify = async (req, res) => {
       return res.status(401).json({ message: "No token provided" });
     }
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, '86260fdbfddda9a87053810e4b1123b00902a786310963c223f168983a8c04ee8a90eb87f4008a0527472cfbbabb22e88e2ae763a7c0090a8834da5755ee5793');
     const user = await User.findById(decoded.id);
 
     if (!user) {
