@@ -5,12 +5,13 @@
 describe("My Orders Page", () => {
     beforeEach(() => {
         document.body.innerHTML = `
-      <div id="orders-loading"></div>
-      <div id="no-orders-message" style="display: none;"></div>
-      <div id="orders-table-container" style="display: none;"></div>
-      <tbody id="orders-table-body"></tbody>
+        <div id="orders-loading"></div>
+        <div id="no-orders-message" style="display: none;"></div>
+        <div id="orders-table-container" style="display: none;"></div>
+        <table><tbody id="orders-table-body"></tbody></table>
     `;
     });
+
 
     test("displays no orders message when orders array is empty", async () => {
         const orders = [];
