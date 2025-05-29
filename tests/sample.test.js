@@ -6,8 +6,8 @@ const jwt = require("jsonwebtoken");
 
 describe("API Endpoints", () => {
     // Replace with a valid JWT for testing authorized endpoints
-    const userToken = jwt.sign({ id: "kalp2002prajapati@gmail.com", role: "customer" }, process.env.JWT_SECRET || "testsecret", { expiresIn: "1h" });
-    const adminToken = jwt.sign({ id: "admin@gmail.com", role: "admin" }, process.env.JWT_SECRET || "testsecret", { expiresIn: "1h" });
+    const userToken = jwt.sign({ id: "kalp2002prajapati@gmail.com", role: "customer" }, process.env.JWT_SECRET || "86260fdbfddda9a87053810e4b1123b00902a786310963c223f168983a8c04ee8a90eb87f4008a0527472cfbbabb22e88e2ae763a7c0090a8834da5755ee5793", { expiresIn: "1h" });
+    const adminToken = jwt.sign({ id: "admin@gmail.com", role: "admin" }, process.env.JWT_SECRET || "86260fdbfddda9a87053810e4b1123b00902a786310963c223f168983a8c04ee8a90eb87f4008a0527472cfbbabb22e88e2ae763a7c0090a8834da5755ee5793", { expiresIn: "1h" });
 
     describe("Product Routes", () => {
         test("Get all products", async () => {
