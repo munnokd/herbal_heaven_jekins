@@ -10,7 +10,7 @@ describe("API Endpoints", () => {
             const res = await request(app).get("/api/products");
             expect(res.statusCode).toBe(200);
         });
-    },10000);
+    });
 
 });
 
