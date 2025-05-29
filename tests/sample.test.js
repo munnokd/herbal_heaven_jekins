@@ -1,8 +1,11 @@
 
 const request = require("supertest");
 const express = require("express");
-const app = require("../app.js"); // Adjust the path to your app entry point
-const jwt = require("jsonwebtoken");
+const app = require("../app.js"); // 
+/**
+ * @jest-environment jsdom
+ */
+
 
 describe("API Endpoints", () => {
 
@@ -38,12 +41,12 @@ describe('Frontend', () => {
     });
 
     test('Description field should be a multi-line textarea', () => {
-  document.body.innerHTML = `<textarea id="description" rows="5" cols="50"></textarea>`;
-  
-  const textarea = document.getElementById('description');
-  expect(textarea.tagName).toBe('TEXTAREA');
-  expect(parseInt(textarea.getAttribute('rows'))).toBeGreaterThan(1);
-});
+        document.body.innerHTML = `<textarea id="description" rows="5" cols="50"></textarea>`;
+
+        const textarea = document.getElementById('description');
+        expect(textarea.tagName).toBe('TEXTAREA');
+        expect(parseInt(textarea.getAttribute('rows'))).toBeGreaterThan(1);
+    });
 
 });
 
