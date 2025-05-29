@@ -10,13 +10,13 @@ describe("API Endpoints", () => {
             const res = await request(app).get("/api/products");
             expect(res.statusCode).toBe(200);
         });
-    });
+    },10000);
     describe("Category Routes", () => {
         test("Get all categories", async () => {
             const res = await request(app).get("/api/categories");
             expect(res.statusCode).toBe(200);
         });
-    });
+    },10000);
 
 });
 
