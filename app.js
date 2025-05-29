@@ -1,54 +1,88 @@
 require("dotenv").config();
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
-const socketManager = require("./socket/socketManager");
+const http = require("http");
 
 const app = express();
+const server = http.createServer(app);
 
-// Middlewares
+// Initialize Socket.IO with our custom manager
+const socketManager = require('./socket/socketManager');
+socketManager.init(server);
+
+// Make socket.io instance accessible to our routes
+app.set("io", socketManager.getIO());
+
+// Import routes
+const authRoutes = require("./routes/authRoutes");
+const productRoutes = require("./routes/productRoutes");
+const orderRoutes = require("./routes/orderRoutes");
+const cartRoutes = require("./routes/cartRoutes");
+const blogRoutes = require("./routes/blogRoutes");
+const userRoutes = require("./routes/userRoutes");
+const categoryRoutes = require("./routes/categoryRoutes");
+const notificationRoutes = require("./routes/notificationRoutes");
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Set up socket.io but do not start server here
-const http = require("http");
-const server = http.createServer(app);
-socketManager.init(server);
-app.set("io", socketManager.getIO());
-
-// Routes
-app.get("/api/student", (req, res) => {
+app.get('/api/student', (req, res) => {
   res.json({
     name: "Kalp Prajapati",
     studentId: "224834542"
   });
 });
 
-// API route setup
-app.use("/api/auth", require("./routes/authRoutes"));
-app.use("/api/products", require("./routes/productRoutes"));
-app.use("/api/orders", require("./routes/orderRoutes"));
-app.use("/api/cart", require("./routes/cartRoutes"));
-app.use("/api/blog", require("./routes/blogRoutes"));
-app.use("/api/users", require("./routes/userRoutes"));
-app.use("/api/categories", require("./routes/categoryRoutes"));
-app.use("/api/notifications", require("./routes/notificationRoutes"));
+// API Routes - Place these before static file serving
+app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/blog", blogRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/categories", categoryRoutes);
+app.use("/api/notifications", notificationRoutes);
 
-// Static file serving
+// Serve static files
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Frontend fallback (skip if /api/)
+// Database connection
+mongoose.connect('mongodb+srv://kalp2002prajapati:SbjvllYj1oo6osxn@cluster0.xfojzlh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+mongoose.connection.on("connected", () => {
+  console.log("Connected to MongoDB!");
+});
+
+mongoose.connection.on("error", (err) => {
+  console.error("MongoDB connection error:", err);
+});
+
+// Serve frontend for non-API routes
 app.get("*", (req, res, next) => {
-  if (req.path.startsWith("/api/")) return next();
+  // Skip this middleware for API routes
+  if (req.path.startsWith('/api/')) {
+    return next();
+  }
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// Error handler
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: "Something went wrong!" });
 });
 
-module.exports = { app, server }; // ✅ export both app and server
+const port = process.env.PORT || 3000;
+server.listen(3000, () => {
+  console.log(`App listening on port ${port}`);
+});
+
+module.exports = app;
