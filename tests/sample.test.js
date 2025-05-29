@@ -1,7 +1,7 @@
 
 const request = require("supertest");
 const express = require("express");
-const app = require("../app"); // Adjust the path to your app entry point
+const app = require("../app.js"); // Adjust the path to your app entry point
 const jwt = require("jsonwebtoken");
 
 describe("API Endpoints", () => {
