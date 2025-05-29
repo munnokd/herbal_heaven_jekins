@@ -15,36 +15,36 @@ describe("API Endpoints", () => {
             expect(res.statusCode).toBe(200);
         });
 
-        // test("Create a product (admin only)", async () => {
-        //     const res = await request(app)
-        //         .post("/api/products")
-        //         .set("Authorization", `Bearer ${adminToken}`)
-        //         .send({ name: "Herbal Tea", price: 10.99 });
-        //     expect(res.statusCode).toBe(201);
-        // });
+        test("Create a product (admin only)", async () => {
+            const res = await request(app)
+                .post("/api/products")
+                .set("Authorization", `Bearer ${adminToken}`)
+                .send({ name: "Herbal Tea", price: 10.99 });
+            expect(res.statusCode).toBe(201);
+        });
     });
 
-    // describe("Order Routes", () => {
-    //     test("Create an order", async () => {
-    //         const res = await request(app)
-    //             .post("/api/orders")
-    //             .set("Authorization", `Bearer ${userToken}`)
-    //             .send({ items: [{ productId: "abc123", quantity: 1 }] });
-    //         expect(res.statusCode).toBe(201);
-    //     });
+    describe("Order Routes", () => {
+        test("Create an order", async () => {
+            const res = await request(app)
+                .post("/api/orders")
+                .set("Authorization", `Bearer ${userToken}`)
+                .send({ items: [{ productId: "abc123", quantity: 1 }] });
+            expect(res.statusCode).toBe(201);
+        });
 
-    //     test("Get user's orders", async () => {
-    //         const res = await request(app)
-    //             .get("/api/orders")
-    //             .set("Authorization", `Bearer ${userToken}`);
-    //         expect(res.statusCode).toBe(200);
-    //     });
+        test("Get user's orders", async () => {
+            const res = await request(app)
+                .get("/api/orders")
+                .set("Authorization", `Bearer ${userToken}`);
+            expect(res.statusCode).toBe(200);
+        });
 
-    //     test("Admin get all orders", async () => {
-    //         const res = await request(app)
-    //             .get("/api/orders/admin/all")
-    //             .set("Authorization", `Bearer ${adminToken}`);
-    //         expect(res.statusCode).toBe(200);
-    //     });
-    // });
+        test("Admin get all orders", async () => {
+            const res = await request(app)
+                .get("/api/orders/admin/all")
+                .set("Authorization", `Bearer ${adminToken}`);
+            expect(res.statusCode).toBe(200);
+        });
+    });
 });
